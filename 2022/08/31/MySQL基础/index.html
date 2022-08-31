@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>W's Learning | W's Learning</title><meta name="author" content="W"><meta name="copyright" content="W"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、为什么要学习数据库     二、数据库的相关概念               DBMS、DB、SQL     三、数据库存储数据的特点     四、初始MySQL         MySQL产品的介绍                 MySQL产品的安装          ★                 MySQL服务的启动和停止     ★         MySQL服务的登录和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="W&#39;s Learning">
+<meta property="og:url" content="http://example.com/2022/08/31/MySQL%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="W&#39;s Learning">
+<meta property="og:description" content="一、为什么要学习数据库     二、数据库的相关概念               DBMS、DB、SQL     三、数据库存储数据的特点     四、初始MySQL         MySQL产品的介绍                 MySQL产品的安装          ★                 MySQL服务的启动和停止     ★         MySQL服务的登录和">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-08-31T07:22:37.831Z">
+<meta property="article:modified_time" content="2022-08-31T07:24:15.757Z">
+<meta property="article:author" content="W">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/08/31/MySQL%E5%9F%BA%E7%A1%80/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'W\'s Learning',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-08-31 15:24:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">W's Learning</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-31T07:22:37.831Z" title="发表于 2022-08-31 15:22:37">2022-08-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-31T07:24:15.757Z" title="更新于 2022-08-31 15:24:15">2022-08-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><pre><code>    一、为什么要学习数据库
+    二、数据库的相关概念      
+        DBMS、DB、SQL
+    三、数据库存储数据的特点
+    四、初始MySQL
+        MySQL产品的介绍        
+        MySQL产品的安装          ★        
+        MySQL服务的启动和停止     ★
+        MySQL服务的登录和退出     ★      
+        MySQL的常见命令和语法规范      
+    五、DQL语言的学习   ★              
+        基础查询        ★             
+        条件查询  	   ★			
+        排序查询  	   ★				
+        常见函数        ★               
+        分组函数        ★              
+        分组查询		   ★			
+        连接查询	 	★			
+        子查询       √                  
+        分页查询       ★              
+        union联合查询	√			
+六、DML语言的学习    ★             
+    插入语句						
+    修改语句						
+    删除语句						
+七、DDL语言的学习  
+    库和表的管理	 √				
+    常见数据类型介绍  √          
+    常见约束  	  √			
+八、TCL语言的学习
+    事务和事务处理                 
+九、视图的讲解           √
+十、变量                      
+十一、存储过程和函数   
+十二、流程控制结构       
+</code></pre>
+<p>##数据库的好处<br>    1.持久化数据到本地<br>    2.可以实现结构化查询，方便管理</p>
+<p>##数据库相关概念<br>    1、DB：数据库，保存一组有组织的数据的容器<br>    2、DBMS：数据库管理系统，又称为数据库软件（产品），用于管理DB中的数据<br>    3、SQL:结构化查询语言，用于和DBMS通信的语言</p>
+<p>##数据库存储数据的特点<br>    1、将数据放到表中，表再放到库中<br>    2、一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。<br>    3、表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。<br>    4、表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”<br>    5、表中的数据是按行存储的，每一行类似于java中的“对象”。</p>
+<p>##MySQL产品的介绍和安装</p>
+<p>###MySQL服务的启动和停止<br>    方式一：计算机——右击管理——服务<br>    方式二：通过管理员身份运行<br>    net start 服务名（启动服务）<br>    net stop 服务名（停止服务）</p>
+<p>###MySQL服务的登录和退出<br>    方式一：通过mysql自带的客户端<br>    只限于root用户</p>
+<pre><code>方式二：通过windows自带的客户端
+登录：
+mysql 【-h主机名 -P端口号 】-u用户名 -p密码
+
+退出：
+exit或ctrl+C
+</code></pre>
+<p>​	<br>​	<br>​	<br>###MySQL的常见命令 </p>
+<pre><code>1.查看当前所有的数据库
+show databases;
+2.打开指定的库
+use 库名
+3.查看当前库的所有表
+show tables;
+4.查看其它库的所有表
+show tables from 库名;
+5.创建表
+create table 表名(
+
+    列名 列类型,
+    列名 列类型，
+    。。。
+);
+6.查看表结构
+desc 表名;
+
+
+7.查看服务器的版本
+方式一：登录到mysql服务端
+select version();
+方式二：没有登录到mysql服务端
+mysql --version
+或
+mysql --V
+</code></pre>
+<p>###MySQL的语法规范<br>    1.不区分大小写,但建议关键字大写，表名、列名小写<br>    2.每条命令最好用分号结尾<br>    3.每条命令根据需要，可以进行缩进 或换行<br>    4.注释<br>        单行注释：#注释文字<br>        单行注释：– 注释文字<br>        多行注释：&#x2F;* 注释文字  *&#x2F;</p>
+<p>###SQL的语言分类<br>    DQL（Data Query Language）：数据查询语言<br>        select<br>    DML(Data Manipulate Language):数据操作语言<br>        insert 、update、delete<br>    DDL（Data Define Languge）：数据定义语言<br>        create、drop、alter<br>    TCL（Transaction Control Language）：事务控制语言<br>        commit、rollback</p>
+<p>###SQL的常见命令</p>
+<pre><code>show databases； 查看所有的数据库
+use 库名； 打开指定 的库
+show tables ; 显示库中的所有表
+show tables from 库名;显示指定库中的所有表
+create table 表名(
+    字段名 字段类型,	
+    字段名 字段类型
+); 创建表
+
+desc 表名; 查看指定表的结构
+select * from 表名;显示表中的所有数据
+</code></pre>
+<p>##DQL语言的学习<br>###进阶1：基础查询<br>    语法：<br>    SELECT 要查询的东西<br>    【FROM 表名】;</p>
+<pre><code>类似于Java中 :System.out.println(要打印的东西);
+特点：
+①通过select查询完的结果 ，是一个虚拟的表格，不是真实存在
+② 要查询的东西 可以是常量值、可以是表达式、可以是字段、可以是函数
+</code></pre>
+<p>###进阶2：条件查询<br>    条件查询：根据条件过滤原始表的数据，查询到想要的数据<br>    语法：<br>    select<br>        要查询的字段|表达式|常量值|函数<br>    from<br>        表<br>    where<br>        条件 ;</p>
+<pre><code>分类：
+一、条件表达式
+    示例：salary&gt;10000
+    条件运算符：
+    &gt; &lt; &gt;= &lt;= = != &lt;&gt;
+
+二、逻辑表达式
+示例：salary&gt;10000 &amp;&amp; salary&lt;20000
+
+逻辑运算符：
+
+    and（&amp;&amp;）:两个条件如果同时成立，结果为true，否则为false
+    or(||)：两个条件只要有一个成立，结果为true，否则为false
+    not(!)：如果条件成立，则not后为false，否则为true
+
+三、模糊查询
+示例：last_name like &#39;a%&#39;
+</code></pre>
+<p>###进阶3：排序查询	</p>
+<pre><code>语法：
+select
+    要查询的东西
+from
+    表
+where 
+    条件
+
+order by 排序的字段|表达式|函数|别名 【asc|desc】
+</code></pre>
+<p>​	<br>###进阶4：常见函数<br>​	一、单行函数<br>​	1、字符函数<br>​		concat拼接<br>​		substr截取子串<br>​		upper转换成大写<br>​		lower转换成小写<br>​		trim去前后指定的空格和字符<br>​		ltrim去左边空格<br>​		rtrim去右边空格<br>​		replace替换<br>​		lpad左填充<br>​		rpad右填充<br>​		instr返回子串第一次出现的索引<br>​		length 获取字节个数<br>​		<br>​	2、数学函数<br>​		round 四舍五入<br>​		rand 随机数<br>​		floor向下取整<br>​		ceil向上取整<br>​		mod取余<br>​		truncate截断<br>​	3、日期函数<br>​		now当前系统日期+时间<br>​		curdate当前系统日期<br>​		curtime当前系统时间<br>​		str_to_date 将字符转换成日期<br>​		date_format将日期转换成字符<br>​	4、流程控制函数<br>​		if 处理双分支<br>​		case语句 处理多分支<br>​			情况1：处理等值判断<br>​			情况2：处理条件判断<br>​		</p>
+<pre><code>5、其他函数
+    version版本
+    database当前库
+    user当前连接用户
+</code></pre>
+<p>​	</p>
+<p>二、分组函数</p>
+<pre><code>    sum 求和
+    max 最大值
+    min 最小值
+    avg 平均值
+    count 计数
+
+    特点：
+    1、以上五个分组函数都忽略null值，除了count(*)
+    2、sum和avg一般用于处理数值型
+        max、min、count可以处理任何数据类型
+    3、都可以搭配distinct使用，用于统计去重后的结果
+    4、count的参数可以支持：
+        字段、*、常量值，一般放1
+
+       建议使用 count(*)
+</code></pre>
+<p>##进阶5：分组查询<br>    语法：<br>    select 查询的字段，分组函数<br>    from 表<br>    group by 分组的字段</p>
+<pre><code>特点：
+1、可以按单个字段分组
+2、和分组函数一同查询的字段最好是分组后的字段
+3、分组筛选
+        针对的表	位置			关键字
+分组前筛选：	原始表		group by的前面		where
+分组后筛选：	分组后的结果集	group by的后面		having
+
+4、可以按多个字段分组，字段之间用逗号隔开
+5、可以支持排序
+6、having后可以支持别名
+</code></pre>
+<p>##进阶6：多表连接查询</p>
+<pre><code>笛卡尔乘积：如果连接条件省略或无效则会出现
+解决办法：添加上连接条件
+</code></pre>
+<p>一、传统模式下的连接 ：等值连接——非等值连接</p>
+<pre><code>1.等值连接的结果 = 多个表的交集
+2.n表连接，至少需要n-1个连接条件
+3.多个表不分主次，没有顺序要求
+4.一般为表起别名，提高阅读性和性能
+</code></pre>
+<p>二、sql99语法：通过join关键字实现连接</p>
+<pre><code>含义：1999年推出的sql语法
+支持：
+等值连接、非等值连接 （内连接）
+外连接
+交叉连接
+
+语法：
+
+select 字段，...
+from 表1
+【inner|left outer|right outer|cross】join 表2 on  连接条件
+【inner|left outer|right outer|cross】join 表3 on  连接条件
+【where 筛选条件】
+【group by 分组字段】
+【having 分组后的筛选条件】
+【order by 排序的字段或表达式】
+
+好处：语句上，连接条件和筛选条件实现了分离，简洁明了！
+</code></pre>
+<p>​	<br>三、自连接</p>
+<p>案例：查询员工名和直接上级的名称</p>
+<p>sql99</p>
+<pre><code>SELECT e.last_name,m.last_name
+FROM employees e
+JOIN employees m ON e.`manager_id`=m.`employee_id`;
+</code></pre>
+<p>sql92</p>
+<pre><code>SELECT e.last_name,m.last_name
+FROM employees e,employees m 
+WHERE e.`manager_id`=m.`employee_id`;
+</code></pre>
+<p>##进阶7：子查询</p>
+<p>含义：</p>
+<pre><code>一条查询语句中又嵌套了另一条完整的select语句，其中被嵌套的select语句，称为子查询或内查询
+在外面的查询语句，称为主查询或外查询
+</code></pre>
+<p>特点：</p>
+<pre><code>1、子查询都放在小括号内
+2、子查询可以放在from后面、select后面、where后面、having后面，但一般放在条件的右侧
+3、子查询优先于主查询执行，主查询使用了子查询的执行结果
+4、子查询根据查询结果的行数不同分为以下两类：
+① 单行子查询
+    结果集只有一行
+    一般搭配单行操作符使用：&gt; &lt; = &lt;&gt; &gt;= &lt;= 
+    非法使用子查询的情况：
+    a、子查询的结果为一组值
+    b、子查询的结果为空
+    
+② 多行子查询
+    结果集有多行
+    一般搭配多行操作符使用：any、all、in、not in
+    in： 属于子查询结果中的任意一个就行
+    any和all往往可以用其他查询代替
+</code></pre>
+<p>##进阶8：分页查询</p>
+<p>应用场景：</p>
+<pre><code>实际的web项目中需要根据用户的需求提交对应的分页查询的sql语句
+</code></pre>
+<p>语法：</p>
+<pre><code>select 字段|表达式,...
+from 表
+【where 条件】
+【group by 分组字段】
+【having 条件】
+【order by 排序的字段】
+limit 【起始的条目索引，】条目数;
+</code></pre>
+<p>特点：</p>
+<pre><code>1.起始条目索引从0开始
+
+2.limit子句放在查询语句的最后
+
+3.公式：select * from  表 limit （page-1）*sizePerPage,sizePerPage
+假如:
+每页显示条目数sizePerPage
+要显示的页数 page
+</code></pre>
+<p>##进阶9：联合查询</p>
+<p>引入：<br>    union 联合、合并</p>
+<p>语法：</p>
+<pre><code>select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】
+select 字段|常量|表达式|函数 【from 表】 【where 条件】 union 【all】
+select 字段|常量|表达式|函数 【from 表】 【where 条件】 union  【all】
+.....
+select 字段|常量|表达式|函数 【from 表】 【where 条件】
+</code></pre>
+<p>特点：</p>
+<pre><code>1、多条查询语句的查询的列数必须是一致的
+2、多条查询语句的查询的列的类型几乎相同
+3、union代表去重，union all代表不去重
+</code></pre>
+<p>##DML语言</p>
+<p>###插入</p>
+<p>语法：<br>    insert into 表名(字段名，…)<br>    values(值1，…);</p>
+<p>特点：</p>
+<pre><code>1、字段类型和值类型一致或兼容，而且一一对应
+2、可以为空的字段，可以不用插入值，或用null填充
+3、不可以为空的字段，必须插入值
+4、字段个数和值的个数必须一致
+5、字段可以省略，但默认所有字段，并且顺序和表中的存储顺序一致
+</code></pre>
+<p>###修改</p>
+<p>修改单表语法：</p>
+<pre><code>update 表名 set 字段=新值,字段=新值
+【where 条件】
+</code></pre>
+<p>修改多表语法：</p>
+<pre><code>update 表1 别名1,表2 别名2
+set 字段=新值，字段=新值
+where 连接条件
+and 筛选条件
+</code></pre>
+<p>###删除</p>
+<p>方式1：delete语句 </p>
+<p>单表的删除： ★<br>    delete from 表名 【where 筛选条件】</p>
+<p>多表的删除：<br>    delete 别名1，别名2<br>    from 表1 别名1，表2 别名2<br>    where 连接条件<br>    and 筛选条件;</p>
+<p>方式2：truncate语句</p>
+<pre><code>truncate table 表名
+</code></pre>
+<p>两种方式的区别【面试题】</p>
+<pre><code>#1.truncate不能加where条件，而delete可以加where条件
+
+#2.truncate的效率高一丢丢
+
+#3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始
+#delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始
+
+#4.truncate删除不能回滚，delete删除可以回滚
+</code></pre>
+<p>##DDL语句<br>###库和表的管理<br>库的管理：</p>
+<pre><code>一、创建库
+create database 库名
+二、删除库
+drop database 库名
+</code></pre>
+<p>表的管理：<br>    #1.创建表</p>
+<pre><code>CREATE TABLE IF NOT EXISTS stuinfo(
+    stuId INT,
+    stuName VARCHAR(20),
+    gender CHAR,
+    bornDate DATETIME
+</code></pre>
+<p>​	<br>​	);<br>​	</p>
+<pre><code>DESC studentinfo;
+#2.修改表 alter
+语法：ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型】;
+
+#①修改字段名
+ALTER TABLE studentinfo CHANGE  COLUMN sex gender CHAR;
+
+#②修改表名
+ALTER TABLE stuinfo RENAME [TO]  studentinfo;
+#③修改字段类型和列级约束
+ALTER TABLE studentinfo MODIFY COLUMN borndate DATE ;
+
+#④添加字段
+
+ALTER TABLE studentinfo ADD COLUMN email VARCHAR(20) first;
+#⑤删除字段
+ALTER TABLE studentinfo DROP COLUMN email;
+</code></pre>
+<p>​	<br>​	#3.删除表<br>​	</p>
+<pre><code>DROP TABLE [IF EXISTS] studentinfo;
+</code></pre>
+<p>​	</p>
+<p>###常见类型</p>
+<pre><code>整型：
+    
+小数：
+    浮点型
+    定点型
+字符型：
+日期型：
+Blob类型：
+</code></pre>
+<p>###常见约束</p>
+<pre><code>NOT NULL
+DEFAULT
+UNIQUE
+CHECK
+PRIMARY KEY
+FOREIGN KEY
+</code></pre>
+<p>##数据库事务<br>###含义<br>    通过一组逻辑操作单元（一组DML——sql语句），将数据从一种状态切换到另外一种状态</p>
+<p>###特点<br>    （ACID）<br>    原子性：要么都执行，要么都回滚<br>    一致性：保证数据的状态操作前和操作后保持一致<br>    隔离性：多个事务同时操作相同数据库的同一个数据时，一个事务的执行不受另外一个事务的干扰<br>    持久性：一个事务一旦提交，则数据将持久化到本地，除非其他事务对其进行修改</p>
+<p>相关步骤：</p>
+<pre><code>1、开启事务
+2、编写事务的一组逻辑操作单元（多条sql语句）
+3、提交事务或回滚事务
+</code></pre>
+<p>###事务的分类：</p>
+<p>隐式事务，没有明显的开启和结束事务的标志</p>
+<pre><code>比如
+insert、update、delete语句本身就是一个事务
+</code></pre>
+<p>显式事务，具有明显的开启和结束事务的标志</p>
+<pre><code>    1、开启事务
+    取消自动提交事务的功能
+    
+    2、编写事务的一组逻辑操作单元（多条sql语句）
+    insert
+    update
+    delete
+    
+    3、提交事务或回滚事务
+</code></pre>
+<p>###使用到的关键字</p>
+<pre><code>set autocommit=0;
+start transaction;
+commit;
+rollback;
+
+savepoint  断点
+commit to 断点
+rollback to 断点
+</code></pre>
+<p>###事务的隔离级别:</p>
+<p>事务并发问题如何发生？</p>
+<pre><code>当多个事务同时操作同一个数据库的相同数据时
+</code></pre>
+<p>事务的并发问题有哪些？</p>
+<pre><code>脏读：一个事务读取到了另外一个事务未提交的数据
+不可重复读：同一个事务中，多次读取到的数据不一致
+幻读：一个事务读取数据时，另外一个事务进行更新，导致第一个事务读取到了没有更新的数据
+</code></pre>
+<p>如何避免事务的并发问题？</p>
+<pre><code>通过设置事务的隔离级别
+1、READ UNCOMMITTED
+2、READ COMMITTED 可以避免脏读
+3、REPEATABLE READ 可以避免脏读、不可重复读和一部分幻读
+4、SERIALIZABLE可以避免脏读、不可重复读和幻读
+</code></pre>
+<p>设置隔离级别：</p>
+<pre><code>set session|global  transaction isolation level 隔离级别名;
+</code></pre>
+<p>查看隔离级别：</p>
+<pre><code>select @@tx_isolation;
+</code></pre>
+<p>##视图<br>含义：理解成一张虚拟的表</p>
+<p>视图和表的区别：</p>
+<pre><code>    使用方式	占用物理空间
+
+视图	完全相同	不占用，仅仅保存的是sql逻辑
+
+表	完全相同	占用
+</code></pre>
+<p>视图的好处：</p>
+<pre><code>1、sql语句提高重用性，效率高
+2、和表实现了分离，提高了安全性
+</code></pre>
+<p>###视图的创建<br>    语法：<br>    CREATE VIEW  视图名<br>    AS<br>    查询语句;<br>###视图的增删改查<br>    1、查看视图的数据 ★</p>
+<pre><code>SELECT * FROM my_v4;
+SELECT * FROM my_v1 WHERE last_name=&#39;Partners&#39;;
+
+2、插入视图的数据
+INSERT INTO my_v4(last_name,department_id) VALUES(&#39;虚竹&#39;,90);
+
+3、修改视图的数据
+
+UPDATE my_v4 SET last_name =&#39;梦姑&#39; WHERE last_name=&#39;虚竹&#39;;
+</code></pre>
+<p>​	<br>​	4、删除视图的数据<br>​	DELETE FROM my_v4;<br>###某些视图不能更新<br>​	包含以下关键字的sql语句：分组函数、distinct、group  by、having、union或者union all<br>​	常量视图<br>​	Select中包含子查询<br>​	join<br>​	from一个不能更新的视图<br>​	where子句的子查询引用了from子句中的表<br>###视图逻辑的更新<br>​	#方式一：<br>​	CREATE OR REPLACE VIEW test_v7<br>​	AS<br>​	SELECT last_name FROM employees<br>​	WHERE employee_id&gt;100;<br>​	</p>
+<pre><code>#方式二:
+ALTER VIEW test_v7
+AS
+SELECT employee_id FROM employees;
+
+SELECT * FROM test_v7;
+</code></pre>
+<p>###视图的删除<br>    DROP VIEW test_v1,test_v2,test_v3;<br>###视图结构的查看	<br>    DESC test_v7;<br>    SHOW CREATE VIEW test_v7;</p>
+<p>##存储过程</p>
+<p>含义：一组经过预先编译的sql语句的集合<br>好处：</p>
+<pre><code>1、提高了sql语句的重用性，减少了开发程序员的压力
+2、提高了效率
+3、减少了传输次数
+</code></pre>
+<p>分类：</p>
+<pre><code>1、无返回无参
+2、仅仅带in类型，无返回有参
+3、仅仅带out类型，有返回无参
+4、既带in又带out，有返回有参
+5、带inout，有返回有参
+注意：in、out、inout都可以在一个存储过程中带多个
+</code></pre>
+<p>###创建存储过程<br>语法：</p>
+<pre><code>create procedure 存储过程名(in|out|inout 参数名  参数类型,...)
+begin
+    存储过程体
+
+end
+</code></pre>
+<p>类似于方法：</p>
+<pre><code>修饰符 返回类型 方法名(参数类型 参数名,...)&#123;
+
+    方法体;
+&#125;
+</code></pre>
+<p>注意</p>
+<pre><code>1、需要设置新的结束标记
+delimiter 新的结束标记
+示例：
+delimiter $
+
+CREATE PROCEDURE 存储过程名(IN|OUT|INOUT 参数名  参数类型,...)
+BEGIN
+    sql语句1;
+    sql语句2;
+
+END $
+
+2、存储过程体中可以有多条sql语句，如果仅仅一条sql语句，则可以省略begin end
+
+3、参数前面的符号的意思
+in:该参数只能作为输入 （该参数不能做返回值）
+out：该参数只能作为输出（该参数只能做返回值）
+inout：既能做输入又能做输出
+</code></pre>
+<p>#调用存储过程<br>    call 存储过程名(实参列表)<br>##函数</p>
+<p>###创建函数</p>
+<p>学过的函数：LENGTH、SUBSTR、CONCAT等<br>语法：</p>
+<pre><code>CREATE FUNCTION 函数名(参数名 参数类型,...) RETURNS 返回类型
+BEGIN
+    函数体
+
+END
+</code></pre>
+<p>###调用函数<br>    SELECT 函数名（实参列表）</p>
+<p>###函数和存储过程的区别</p>
+<pre><code>        关键字		调用语法	返回值			应用场景
+函数		FUNCTION	SELECT 函数()	只能是一个		一般用于查询结果为一个值并返回时，当有返回值而且仅仅一个
+存储过程	PROCEDURE	CALL 存储过程()	可以有0个或多个		一般用于更新
+</code></pre>
+<p>##流程控制结构</p>
+<p>###系统变量<br>一、全局变量</p>
+<p>作用域：针对于所有会话（连接）有效，但不能跨重启</p>
+<pre><code>查看所有全局变量
+SHOW GLOBAL VARIABLES;
+查看满足条件的部分系统变量
+SHOW GLOBAL VARIABLES LIKE &#39;%char%&#39;;
+查看指定的系统变量的值
+SELECT @@global.autocommit;
+为某个系统变量赋值
+SET @@global.autocommit=0;
+SET GLOBAL autocommit=0;
+</code></pre>
+<p>二、会话变量</p>
+<p>作用域：针对于当前会话（连接）有效</p>
+<pre><code>查看所有会话变量
+SHOW SESSION VARIABLES;
+查看满足条件的部分会话变量
+SHOW SESSION VARIABLES LIKE &#39;%char%&#39;;
+查看指定的会话变量的值
+SELECT @@autocommit;
+SELECT @@session.tx_isolation;
+为某个会话变量赋值
+SET @@session.tx_isolation=&#39;read-uncommitted&#39;;
+SET SESSION tx_isolation=&#39;read-committed&#39;;
+</code></pre>
+<p>###自定义变量<br>一、用户变量</p>
+<p>声明并初始化：</p>
+<pre><code>SET @变量名=值;
+SET @变量名:=值;
+SELECT @变量名:=值;
+</code></pre>
+<p>赋值：</p>
+<pre><code>方式一：一般用于赋简单的值
+SET 变量名=值;
+SET 变量名:=值;
+SELECT 变量名:=值;
+
+
+方式二：一般用于赋表 中的字段值
+SELECT 字段名或表达式 INTO 变量
+FROM 表;
+</code></pre>
+<p>使用：</p>
+<pre><code>select @变量名;
+</code></pre>
+<p>二、局部变量</p>
+<p>声明：</p>
+<pre><code>declare 变量名 类型 【default 值】;
+</code></pre>
+<p>赋值：</p>
+<pre><code>方式一：一般用于赋简单的值
+SET 变量名=值;
+SET 变量名:=值;
+SELECT 变量名:=值;
+
+
+方式二：一般用于赋表 中的字段值
+SELECT 字段名或表达式 INTO 变量
+FROM 表;
+</code></pre>
+<p>使用：</p>
+<pre><code>select 变量名
+</code></pre>
+<p>二者的区别：</p>
+<pre><code>        作用域			定义位置		语法
+</code></pre>
+<p>用户变量	当前会话		会话的任何地方		加@符号，不用指定类型<br>局部变量	定义它的BEGIN END中 	BEGIN END的第一句话	一般不用加@,需要指定类型</p>
+<p>###分支<br>一、if函数<br>    语法：if(条件，值1，值2)<br>    特点：可以用在任何位置</p>
+<p>二、case语句</p>
+<p>语法：</p>
+<pre><code>情况一：类似于switch
+case 表达式
+when 值1 then 结果1或语句1(如果是语句，需要加分号) 
+when 值2 then 结果2或语句2(如果是语句，需要加分号)
+...
+else 结果n或语句n(如果是语句，需要加分号)
+end 【case】（如果是放在begin end中需要加上case，如果放在select后面不需要）
+
+情况二：类似于多重if
+case 
+when 条件1 then 结果1或语句1(如果是语句，需要加分号) 
+when 条件2 then 结果2或语句2(如果是语句，需要加分号)
+...
+else 结果n或语句n(如果是语句，需要加分号)
+end 【case】（如果是放在begin end中需要加上case，如果放在select后面不需要）
+</code></pre>
+<p>特点：<br>    可以用在任何位置</p>
+<p>三、if elseif语句</p>
+<p>语法：</p>
+<pre><code>if 情况1 then 语句1;
+elseif 情况2 then 语句2;
+...
+else 语句n;
+end if;
+</code></pre>
+<p>特点：<br>    只能用在begin end中！！！！！！！！！！！！！！！</p>
+<p>三者比较：<br>            应用场合<br>    if函数		简单双分支<br>    case结构	等值判断 的多分支<br>    if结构		区间判断 的多分支</p>
+<p>###循环</p>
+<p>语法：</p>
+<pre><code>【标签：】WHILE 循环条件  DO
+    循环体
+END WHILE 【标签】;
+</code></pre>
+<p>特点：</p>
+<pre><code>只能放在BEGIN END里面
+
+如果要搭配leave跳转语句，需要使用标签，否则可以不用标签
+
+leave类似于java中的break语句，跳出所在循环！！！
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">W</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/31/MySQL%E5%9F%BA%E7%A1%80/">http://example.com/2022/08/31/MySQL%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">W's Learning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/31/%E4%BD%A0%E5%A5%BD/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">W</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/31/MySQL%E5%9F%BA%E7%A1%80/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/08/31/MySQL%E5%9F%BA%E7%A1%80/" title="无题">无题</a><time datetime="2022-08-31T07:22:37.831Z" title="发表于 2022-08-31 15:22:37">2022-08-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/31/%E4%BD%A0%E5%A5%BD/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/08/31/%E4%BD%A0%E5%A5%BD/" title="无题">无题</a><time datetime="2022-08-31T06:19:34.600Z" title="发表于 2022-08-31 14:19:34">2022-08-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/31/hello-world/" title="Hello World"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/08/31/hello-world/" title="Hello World">Hello World</a><time datetime="2022-08-31T03:57:24.852Z" title="发表于 2022-08-31 11:57:24">2022-08-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By W</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
